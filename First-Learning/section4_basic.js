@@ -113,3 +113,8 @@ print(ful);
 print("//-------------------------------------------");
 print("// 4.5 数组的基础");
 print("//-------------------------------------------");
+//生成
+let arraySample = ["a", 1, 1.2];
+print(arraySample);
+arraySample.length = 2;
+print(arraySample);
