@@ -1,33 +1,253 @@
 <!--****************************************************************************
                             第六章 网页上的输入输出
 *****************************************************************************-->
-
 <!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8">
-  <title>sample</title>
+  <title>section6_basic</title>
+
+  <script>
+    // 通过DOM登陆
+    window.onload = function() {
+      var button = document.getElementById('eventSample');
+      button.onclick = eventSample;
+
+
+      var timeoutButton = document.getElementById('timeout');
+      timeoutButton.onclick = function (){
+        let timer = setTimeout(timeoutSample, 1000);
+      }
+
+      var intervalButton = document.getElementById('setInterval');
+      let timer = null
+      intervalButton.onclick = function() {
+        timer = setInterval(
+          function () {
+            alert('间隔运行开始');
+          }, 2000
+        )
+      };
+
+
+      var clearIntervalButton = document.getElementById('clearInterval');
+      clearIntervalButton.onclick = function () {
+        clearInterval(timer);
+      };
+
+      let readFormSample = document.getElementById('read-form-sample');
+      readFormSample.onclick = getFormInputSample;
+
+      //6.4
+      // TODO: fix restart
+      // TODO: 减少frag，直接把事件屏蔽
+      let startTimerButton = document.getElementById('startTimer');
+      let stopTimerButton = document.getElementById('stopTimer');
+      let clearTimerButton = document.getElementById('clearTimer');
+      let timerOutput = document.getElementById('timerOutput');
+      let startTime;
+      let countDown;
+      let isStarted = false;
+      let isNeedNewStartTime = true;
+      let isFromRestart = false;
+      let stopTime = false;
+      startTimerButton.onclick = startTimer;
+      stopTimerButton.onclick = function () {
+        clearInterval(countDown);
+        isStarted = false;
+        isFromRestart = true;
+        stopTime = new Date();
+      };
+      clearTimerButton.onclick = function () {
+        clearInterval(countDown);
+        isStarted = false;
+        startTime = null;
+        isNeedNewStartTime = true;
+        timerOutput.innerHTML = '未开始';
+      };
+
+      function startTimer() {
+        if (isStarted === false) {
+          if (isNeedNewStartTime) {
+            startTime = new Date();
+            isNeedNewStartTime = false;
+          }else if (isFromRestart === true) {
+            isFromRestart = false;
+            let restartTime = new Date();
+            let temp = restartTime - stopTime;
+            startTime = startTime + temp;
+
+          }
+          countDown = setInterval(
+            function() {
+              let now = new Date();
+              timerOutput.innerHTML = ((now - startTime)/1000).toFixed(2);
+          }, 10);
+          isStarted = true;
+        }
+      }
+
+      let BMI_Button = document.getElementById('BMI-get-result');
+      BMI_Button.onclick = getBMIResult;
+
+    }
+    // -------------------------------------------------------
+    //                    6.1 dialog
+    // -------------------------------------------------------
+    // alert, confirm, prompt
+    function dialogTest() {
+      if (confirm("要开始6.1 dialog的模板咩😳")) {
+        alert("这是一个alert")
+        let name = prompt("说点啥啊大佬😳😄😂");
+        let result = confirm(name + "是你咩😳 ");
+        if (result === true) {
+          alert("你是【" + name + "】😊");
+        }else {
+          alert("sb滚😒");
+        }
+      }else {
+        alert("不开始还点开我干嘛😒");
+      }
+    }
+    // -------------------------------------------------------
+    //                    6.2 console
+    // -------------------------------------------------------
+    function Sample(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    function consoleTest() {
+      let a = new Sample("人造人一号", 999);
+      console.dir(a);
+      console.log("this is console", "log");
+      console.info("this is console", "info");
+      console.warn("this is console", "warn");
+      console.error("this is console", "error");
+      console.log(a["name"]);
+      console.log(a.name);
+
+      let timerStr = "96A5C9C6-6D20-4036-A1B8-F136EECC8879";
+      console.time(timerStr);
+      alert("计时器已开始");
+      console.timeEnd(timerStr);
+    }
+    // -------------------------------------------------------
+    //                 6.3 事件登陆与计时器
+    // -------------------------------------------------------
+    // 通过HTML直接登陆
+    function eventSample() {
+      alert("恭喜！你成功登记了事件！😊");
+    }
+    // // 通过DOM登陆
+    // window.onload = function() {
+    //   var button = document.getElementById('eventSample');
+    //   button.onclick = eventSample;
+    //
+    //
+    //   var timeoutButton = document.getElementById('timeout');
+    //   timeoutButton.onclick = function (){
+    //     let timer = setTimeout(timeoutSample, 1000);
+    //   }
+    //
+    //   var intervalButton = document.getElementById('setInterval');
+    //   let timer = null
+    //   intervalButton.onclick = function() {
+    //     timer = setInterval(
+    //       function () {
+    //         alert('间隔运行开始');
+    //       }, 2000
+    //     )
+    //   };
+    //
+    //
+    //   var clearIntervalButton = document.getElementById('clearInterval');
+    //   clearIntervalButton.onclick = function () {
+    //     clearInterval(timer);
+    //   };
+    // }
+
+    function timeoutSample() {
+      alert("恭喜！你成功运行了迟延事件！😊");
+    }
+
+    // -------------------------------------------------------
+    //                 6.4 动态读写html元素
+    // -------------------------------------------------------
+    function getFormInputSample() {
+      let formSample = document.getElementById('checkbox-sample');
+      console.log("name", formSample.name, "value", formSample.value, 'checked', formSample.checked);
+      alert("name: " + formSample.name + "\nvalue: " + formSample.value + '\nchecked: ' + formSample.checked);
+    }
+
+    function getBMIResult() {
+      let weight = document.getElementById('BMI-weight').value;
+      let height = document.getElementById('BMI-height').value/100;
+      let outputArea = document.getElementById('BMI-result')
+      let temp = (weight/(height*height)).toFixed(1);
+      outputArea.innerHTML = temp;
+    }
+
+    // -------------------------------------------------------
+    //                 6.5 通过canvas的几何绘图
+    // -------------------------------------------------------
+    // TODO: 补充6.5
+  </script>
 </head>
 
-<body>
-  <script>
-  // -------------------------------------------------------
-  //                    6.1 dialog
-  // -------------------------------------------------------
-  // alert, confirm, prompt
-  if (confirm("要开始6.1 dialog的模板咩😳")) {
-    alert("这是一个alert")
-    let name = prompt("说点啥啊大佬😳😄😂");
-    let result = confirm(name + "是你咩😳 ");
-    if (result === true) {
-      alert("你是【" + name + "】😊");
-    }else {
-      alert("sb滚😒");
-    }
-  }else {
-    alert("不开始还点开我干嘛😒")
-  }
+<body style="background-color: gray;">
+  <div class="mainBody" style="margin: auto; text-align: center;">
+    <!--*********************************************
+                     6.1 dialog
+    **********************************************-->
+    <h1>6.1 dialog</h1>
+    <input type="button" value="6.1 dialog" onclick="dialogTest()">
+    <!--*********************************************
+                     6.2 console
+    **********************************************-->
+    <h1>6.2 console</h1>
+    <input type="button" value="6.2 console" onclick="consoleTest()">
+    <!--*********************************************
+                     6.3 事件登陆
+    **********************************************-->
+    <h1>6.3 事件登陆</h1>
+    <!-- 通过HTML直接登陆 -->
+    <input type="button" value="登陆事件的测试" onclick="eventSample()">
+    <p onclick="eventSample()" style="border: 2px solid red;">看看可不可以对这个进行事件登陆</p>
 
-  </script>
+    <!-- 通过DOM登陆 -->
+    <p style="border: 2px solid red;" id="eventSample">测试一下</p>
+
+    <!-- timer -->
+    <input type="button" value="过一会儿才会运行" id="timeout">
+    <input type="button" value="间隔一会儿运行" id="setInterval">
+    <input type="button" value="取消间隔运行" id="clearInterval">
+
+    <!--*********************************************
+                   6.4 动态读写html元素
+    **********************************************-->
+    <h1>6.4 动态读写html元素</h1>
+    <p id="timerOutput" style="margin: auto; width: 30%; border: solid 1px blue; text-align: center; margin-top: 10px; margin-bottom: 10px;">未开始</p>
+    <input type="button" value="开始计时" id="startTimer">
+    <input type="button" value="停止" id="stopTimer">
+    <input type="button" value="清零" id="clearTimer">
+
+    <p>读取form的输入值等</p>
+    <input type="checkbox" id="checkbox-sample" name="UUID-123" value="UUID-456">
+    <input type="button" value="停止" id="read-form-sample">
+
+    <p>BMI计算器</p>
+    <p>身高<input type="number" id="BMI-height">cm</P>
+    <p>体重<input type="number" id="BMI-weight">kg</p>
+    <input type="button" id="BMI-get-result" value="计算BMI">
+    <p id="BMI-result">?</p>
+
+    <!-- document.write test -->
+    <script>
+      document.write('<p style="color:blue;">!?!?!?!?!?</P>')
+    </script>
+  </div>
+
 </body>
 </html>
