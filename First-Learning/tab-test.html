@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sample</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body style="background-color: gray;">
+  <!--タブコンポーネントを使ってHTMLコーディング-->
+  <ul class="nav nav-tabs nav-justified">
+    <li class="nav-item">
+      <a href="#tab1" class="nav-link" data-toggle="tab">メーカー　＞</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab2" class="nav-link" data-toggle="tab">車種　＞</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab3" class="nav-link" data-toggle="tab">地域　＞</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab4" class="nav-link" data-toggle="tab">価格　＞</a>
+    </li>
+    <li class="nav-item">
+      <a href="" class="nav-link" data-toggle="tab">検索</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane">
+      111
+      <p style="background-color: red;" id="go-to-next-1">to next</p>
+    </div>
+
+    <div id="tab2" class="tab-pane">
+      222
+      <p style="background-color: red;" id="go-to-next-2">to next</p>
+    </div>
+
+    <div id="tab3" class="tab-pane">
+      333
+      <p style="background-color: red;" id="go-to-next-3">to next</p>
+    </div>
+
+    <div id="tab4" class="tab-pane">
+      444
+      <p style="background-color: red;" id="go-to-next-4">to next</p>
+    </div>
+  </div>
+
+  <script>
+    let gotoNext1 = document.getElementById("go-to-next-1")
+    gotoNext1.onclick = function () {
+      alert("!!");
+      let now = document.getElementById("tab1");
+      now.class = "tab-pane";
+      let next = document.getElementById("tab2");
+      next.class = "tab-pane active";
+    }
+  </script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
