@@ -1,0 +1,107 @@
+<!--****************************************************************************
+                            第13章 Web Object
+*****************************************************************************-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>section-13</title>
+</head>
+
+<body style="background-color: gray;">
+  <script>
+    function section13_basic() {
+      let isNeedOpen = window.confirm("是否开始测试");
+      if (isNeedOpen) {
+        console.log("testing");
+
+      }
+    }
+
+    function test_13_2() {
+      console.log("touched test_13_2()");
+      if (confirm("是否以location.href来跳转")) {
+        location.href = "http://blog.sina.com.cn/s/blog_dcb875d90102ybvg.html#dbox_dcb875d90102ybvg";
+        // location.hash = "commentNick";
+        location.search = "q%5Bmaker_name_eq_any%5D=スズキ"
+      } else {
+        if (confirm("取消测试？")) {
+          return;
+        } else {
+          location.assign("http://blog.sina.com.cn/lancgg");
+        }
+      }
+
+    }
+
+    function test_13_3() {
+      console.log("touched test_13_3()");
+    }
+
+    function test_13_4() {
+      console.log("touched test_13_4()");
+      console.log("appCodename:", navigator.appCodename);
+      console.log("appName:", navigator.appName);
+      console.log("geolocation:", navigator.geoLocation);
+      console.log("isOnline:", navigator.onLine);
+      console.log("userAgent:", navigator.userAgent);
+    }
+
+    function test_13_5() {
+
+    }
+
+    function test_13_6() {
+
+    }
+
+    function test_13_7() {
+
+    }
+  </script>
+  <div class="mainBody" style="margin: auto; text-align: center;">
+    <!--*********************************************
+                     13.2 Location Obejct
+    **********************************************-->
+    <h1>13.2 Location Obejct</h1>
+    <input type="button" value="13.2 Location Object" onclick="test_13_2()">
+
+    <!--*********************************************
+                     13.3 History Object
+    **********************************************-->
+    <h1>13.3 History Object</h1>
+    <input type="button" value="13.3 History Object" onclick="test_13_3()">
+
+    <!--*********************************************
+                     13.4 Navigator Obejct
+    **********************************************-->
+    <h1>13.4 Navigator Obejct</h1>
+    <input type="button" value="13.4 Navigator Obejct" onclick="test_13_4()">
+
+    <!--*********************************************
+                     13.4 Location Obejct
+    **********************************************-->
+    <h1>13.2 Location Obejct</h1>
+    <input type="button" value="13.2 Location Object" onclick="test_13_2()">
+
+    <!--*********************************************
+                     13.5 Location Obejct
+    **********************************************-->
+    <h1>13.2 Location Obejct</h1>
+    <input type="button" value="13.2 Location Object" onclick="test_13_2()">
+
+    <!--*********************************************
+                     13.6 Location Obejct
+    **********************************************-->
+    <h1>13.2 Location Obejct</h1>
+    <input type="button" value="13.2 Location Object" onclick="test_13_2()">
+
+    <!--*********************************************
+                     13.7 Location Obejct
+    **********************************************-->
+    <h1>13.2 Location Obejct</h1>
+    <input type="button" value="13.2 Location Object" onclick="test_13_2()">
+  </div>
+
+</body>
+</html>
