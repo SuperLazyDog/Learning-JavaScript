@@ -11,16 +11,16 @@
 <body style="background-color: gray;">
   <!--タブコンポーネントを使ってHTMLコーディング-->
   <ul class="nav nav-tabs nav-justified">
-    <li class="nav-item">
+    <li class="nav-item" id="menu-item-1">
       <a href="#tab1" class="nav-link" data-toggle="tab">メーカー　＞</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" id="menu-item-2">
       <a href="#tab2" class="nav-link" data-toggle="tab">車種　＞</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" id="menu-item-3">
       <a href="#tab3" class="nav-link" data-toggle="tab">地域　＞</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" id="menu-item-4">
       <a href="#tab4" class="nav-link" data-toggle="tab">価格　＞</a>
     </li>
     <li class="nav-item">
@@ -53,11 +53,12 @@
   <script>
     let gotoNext1 = document.getElementById("go-to-next-1")
     gotoNext1.onclick = function () {
-      alert("!!");
-      let now = document.getElementById("tab1");
-      now.class = "tab-pane";
-      let next = document.getElementById("tab2");
-      next.class = "tab-pane active";
+      //alert("!!");
+      let now = document.getElementById("menu-item-1");
+      now.class = "nav-item";//"tab-pane";
+      // alert(now.innerHTML);
+      let next = document.getElementById("menu-item-2");
+      next.class = "nav-item active";//"tab-pane active";
     }
   </script>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
