@@ -5,13 +5,79 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>section-13</title>
+  <title>section-14</title>
 </head>
 
 <body style="background-color: gray;">
+  <style>
+    .abc {
+      color: red;
+    }
+    .red {
+      color: red;
+    }
+
+    .green {
+      color: green;
+    }
+
+    .blue {
+      color: blue;
+    }
+
+    .black {
+
+    }
+  </style>
   <script>
     function test_14_1() {
+      let id_test = document.getElementById('id-test');
+      console.log('id_test:' + id_test);
+      console.dir(id_test);
+      // id_test.className = "abc";
+      let tag_test = document.getElementsByTagName('h1');
+      console.dir(tag_test);
     }
+    var color_test = document.getElementsByClassName('color-test');
+    function color(color) {
+      console.dir(color_test);
+      // color_test[0].className = 'color-test ' + color;
+      color_test[0].setAttribute("class", "color-test " + color);
+      console.log(color);
+    }
+
+    function test_14_3() {
+      console.log(color_test[0].hasAttribute("dcad"));
+      console.log(color_test[0].hasAttribute("class"));
+      color_test[0].setAttribute("class", "blue");
+    }
+
+    function test_14_4() {
+      let sample = document.getElementByName("test14_4");
+      console.log(sample.innerHTML);
+      console.log(sample.innerText);
+      console.dir(sample.firstChild);
+    }
+    // TODO: p388 例子
+
+    function test_14_7() {
+      console.log('touchde test_14_7');
+      let sample = document.getElementById('test_14_7');
+      console.dir(sample);
+      console.log(sample.random);
+      console.log(sample.getAttribute("random"));
+      console.log(sample.dataset);
+      console.log(sample.dataset.random);
+
+    }
+    function formFunction() {
+      let b = document.getElementById('form-box-b');
+      // b.checked = true;
+      console.dir(b);
+      console.dir(b.checked);
+      b.checked = true;
+    }
+    // TODO: p400 CSS控制
   </script>
   <div class="mainBody" style="margin: auto; text-align: center;">
     <!--*********************************************
@@ -19,6 +85,14 @@
     **********************************************-->
     <h1>14.1 DOM树</h1>
     <input type="button" value="14.1 DOM树" onclick="test_14_1()">
+    <!-- id test -->
+    <p id="id-test">id-test</p>
+    <!-- class name test -->
+    <p class="color-test">123</p>
+    <input type="button" value="红" onclick="color('red')">
+    <input type="button" value="绿" onclick="color('green')">
+    <input type="button" value="蓝" onclick="color('blue')">
+    <input type="button" value="黑" onclick="color('black')">
 
     <!--*********************************************
                      14.2 获取节点
@@ -37,6 +111,7 @@
     **********************************************-->
     <h1>14.4 获取/设定要素</h1>
     <input type="button" value="14.4 获取/设定要素" onclick="test_14_4()">
+    <p id="test14_4"><span>123</span>456</p>
 
     <!--*********************************************
                  14.5 生成, 插入, 删除节点
@@ -55,7 +130,11 @@
     **********************************************-->
     <h1>14.7 HTML表格</h1>
     <input type="button" value="14.7 HTML表格" onclick="test_14_7()">
-
+    <p random="123" data-random="321" id="test_14_7">123</p>
+    <form method="get">
+      <input type="checkbox" id="form-box-a" value="Bike" onclick="formFunction()">box-a<br>
+      <input type="checkbox" id="form-box-b" value="Bike">box-b<br>
+    </form>
     <!--*********************************************
                      14.8 CSS的控制
     **********************************************-->
