@@ -8,7 +8,7 @@
   <title>section-16</title>
 </head>
 
-<body style="background-color: #2D3037;//gray;//#2D3037;">
+<body style="background-color: gray;//#2D3037;//gray;//#2D3037;">
   <style>
     .abc {
       color: red;
@@ -31,10 +31,31 @@
   </style>
   <script>
     function test_16_1() {
-
+      console.log("16.1 touched");
     }
 
-    // TODO: 补充16.9 p435
+    function test_16_2() {
+      console.log("16.2 touched");
+    }
+
+    function test_16_3() {
+      console.log("16.3 touched");
+
+      var req = new XMLHttpRequest();
+      req.addEventListener("readystatechange", function (){
+        console.log("readyState: " + req.readyState +  " status: " + req.status);
+      });
+      req.open("GET", "file:///Users/xuweida/Desktop/github/Learning-JavaScript/First-Learning/section16_basic.html");
+      req.send(null);
+    }
+
+    function test_16_4() {
+      console.log("16.4 touched");
+    }
+
+    function test_16_5() {
+      console.log("16.5 touched");
+    }
   </script>
   <div class="mainBody" style="margin: auto; text-align: center;">
     <!--*********************************************
