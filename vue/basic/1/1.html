@@ -25,9 +25,43 @@
     </span>
   </div>
 
+  <hr>
 
   <div id="app-3">
     <span v-if="seen">Now you see me</span>
+  </div>
+
+
+  <div id="app-4">
+    <table>
+      <tr v-for="data in datas">
+        <td>{{ data.text }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+
+
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+
+  <div id="app-7">
+    <cop-1></cop-1>
+    <ol>
+      <todo-item></todo-item>
+    </ol>
+  </div>
+
+  <div id="app-8">
+    <div v-for="data in numbers">
+      <cop-2 v-bind:prop="data"></cop-2>
+    </div>
   </div>
 </body>
 </html>
