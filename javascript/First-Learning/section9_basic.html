@@ -16,27 +16,91 @@
 //-------------------------------------------
 // 9.1 对象的生成
 //-------------------------------------------
-var ob = {
-  start: "start",
-  message: {
-    name: "weida",
-    age: 23
-  },
-  status: {
-    statusCode: 0,
-    msg: "ok"
-  },
-  end: "over"
-}
-console.dir(ob);
-console.dir(ob.__proto__);
+// 字符生成
+console.log('//-------------------------------------------');
+console.log('// 9.1 对象的生成');
+console.log('//-------------------------------------------');
+var o1 = {a: 1, b: 2}
+console.log('o1: ' + o1);
 
-var func = function() {};
-console.dir(func);
-console.dir(func.__proto__);
+// 构造函数生成
+function O2() {
+  this.a = 1;
+  this.b = 2;
+}
+var o2 = new O2();
+console.log('o2: ' + o2);
+
+// Object#create生成
+console.log(Object.prototype);
+var o3 = Object.create(Object.prototype, {
+  a: {
+    value: 1,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  },
+  b: {
+    value: 1,
+    writable: true,
+    enumerable: true,
+    configurable: true
+  }
+});
+console.log('o3: ' + o3);
+
+// prototype
+// prototype默认为空，可以添加属性
+// 添加的属性所有生成的实例共享
+function A() {
+  this.a = 1
+};
+A.prototype.sample = "prototype sample"
+
+var o4 = new A();
+console.log(o4.sample);
+console.log(o4.a);
+
+var o5 = new A();
+o5.a = 2;
+o5.sample = "o5 sample"
+console.log(o5.a, o4.a, A.prototype.a);
+console.log(('o5:' + o5.sample), ('o4:' + o4.sample), ('A:' + A.prototype.sample));
 //-------------------------------------------
 // 9.2 对象的继承
 //-------------------------------------------
+// __proto__
+console.log('//-------------------------------------------');
+console.log('// 9.2 对象的继承');
+console.log('//-------------------------------------------');
+var o6 = {
+  name: 'a',
+  show: function() {
+    console.log('name: ' + this.name);
+    return 'ok';
+  }
+};
+console.log(o6.show());
+var o7 = {
+  name: 'b'
+};
+o7.__proto__ = o6;
+console.log(o7.show());
+var o8 = {};
+o8.__proto__ = o7;
+console.log(o8.show());
+console.log(Object.getPrototypeOf(o8));
+
+// new的作用
+function Sample(a, b) {
+  this.a = a;
+  this.b = b;
+}
+Sample.prototype.show = function () {
+  console.log(this.a + this.b);
+}
+var o9 = new Sample(10, 30);
+console.log(o9.show());
 
 //-------------------------------------------
 // 9.3 修饰性属性
