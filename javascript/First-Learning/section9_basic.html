@@ -16,130 +16,138 @@
 //-------------------------------------------
 // 9.1 对象的生成
 //-------------------------------------------
-// 字符生成
-console.log('//-------------------------------------------');
-console.log('// 9.1 对象的生成');
-console.log('//-------------------------------------------');
-var o1 = {a: 1, b: 2}
-console.log('o1: ' + o1);
+function Object9_1() {
+  // 字符生成
+  console.log('//-------------------------------------------');
+  console.log('// 9.1 对象的生成');
+  console.log('//-------------------------------------------');
+  var o1 = {a: 1, b: 2}
+  console.log('o1: ' + o1);
 
-// 构造函数生成
-function O2() {
-  this.a = 1;
-  this.b = 2;
-}
-var o2 = new O2();
-console.log('o2: ' + o2);
-
-// Object#create生成
-console.log(Object.prototype);
-var o3 = Object.create(Object.prototype, {
-  a: {
-    value: 1,
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
-  b: {
-    value: 1,
-    writable: true,
-    enumerable: true,
-    configurable: true
+  // 构造函数生成
+  function O2() {
+    this.a = 1;
+    this.b = 2;
   }
-});
-console.log('o3: ' + o3);
+  var o2 = new O2();
+  console.log('o2: ' + o2);
 
-// prototype
-// prototype默认为空，可以添加属性
-// 添加的属性所有生成的实例共享
-function A() {
-  this.a = 1
-};
-A.prototype.sample = "prototype sample"
+  // Object#create生成
+  console.log(Object.prototype);
+  var o3 = Object.create(Object.prototype, {
+    a: {
+      value: 1,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    b: {
+      value: 1,
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
+  console.log('o3: ' + o3);
 
-var o4 = new A();
-console.log(o4.sample);
-console.log(o4.a);
+  // prototype
+  // prototype默认为空，可以添加属性
+  // 添加的属性所有生成的实例共享
+  function A() {
+    this.a = 1
+  };
+  A.prototype.sample = "prototype sample"
 
-var o5 = new A();
-o5.a = 2;
-o5.sample = "o5 sample"
-console.log(o5.a, o4.a, A.prototype.a);
-console.log(('o5:' + o5.sample), ('o4:' + o4.sample), ('A:' + A.prototype.sample));
+  var o4 = new A();
+  console.log(o4.sample);
+  console.log(o4.a);
+
+  var o5 = new A();
+  o5.a = 2;
+  o5.sample = "o5 sample"
+  console.log(o5.a, o4.a, A.prototype.a);
+  console.log(('o5:' + o5.sample), ('o4:' + o4.sample), ('A:' + A.prototype.sample));
+}
+Object9_1();
 //-------------------------------------------
 // 9.2 对象的继承
 //-------------------------------------------
-// __proto__
-console.log('//-------------------------------------------');
-console.log('// 9.2 对象的继承');
-console.log('//-------------------------------------------');
-var o6 = {
-  name: 'a',
-  show: function() {
-    console.log('name: ' + this.name);
-    return 'ok';
+function Object9_2() {
+  // __proto__
+  console.log('//-------------------------------------------');
+  console.log('// 9.2 对象的继承');
+  console.log('//-------------------------------------------');
+  var o6 = {
+    name: 'a',
+    show: function() {
+      console.log('name: ' + this.name);
+      return 'ok';
+    }
+  };
+  console.log(o6.show());
+  var o7 = {
+    name: 'b'
+  };
+  o7.__proto__ = o6;
+  console.log(o7.show());
+  var o8 = {};
+  o8.__proto__ = o7;
+  console.log(o8.show());
+  console.log(Object.getPrototypeOf(o8));
+
+  // new的作用
+  function Sample(a, b) {
+    this.a = a;
+    this.b = b;
   }
-};
-console.log(o6.show());
-var o7 = {
-  name: 'b'
-};
-o7.__proto__ = o6;
-console.log(o7.show());
-var o8 = {};
-o8.__proto__ = o7;
-console.log(o8.show());
-console.log(Object.getPrototypeOf(o8));
+  Sample.prototype.show = function () {
+    console.log(this.a + this.b);
+  }
+  var o9 = new Sample(10, 30);
+  console.log(o9.show());
 
-// new的作用
-function Sample(a, b) {
-  this.a = a;
-  this.b = b;
+  // prototype的属性
+  function F() {};
+  console.log(F.prototype.constructor);
+  console.log(F.prototype.__proto__);
+  var o10 = new F();
+  console.log(o10.constructor);
+  var o11 = {};
+  console.log(o11.__proto__);
+  console.log(o11.prototype);
+  console.log(o11.constructor);
+  F.prototype.hello = function () { console.log("hello"); };
+
+  function F() {};
+  var obj = new F();
+  console.log(obj instanceof F); // true
+  console.log(obj instanceof Object); // true
+  console.log(obj instanceof Date); // false
+
+  function F() {};
+  var obj = new F();
+  console.log(F.prototype.isPrototypeOf(obj)); // true
+  console.log(Object.prototype.isPrototypeOf(obj)); // true
+  console.log(Date.prototype.isPrototypeOf(obj)); // false
+
+  var o12 = Object(1.222);
+  console.log(o12);
+  console.log(Object.getOwnPropertyDescriptor({a:1}, 'a'));
+  var o13 = {a:1, b:2, c: 3, d:4}
+  console.log(Object.keys(o13));
+  console.log(Object.getOwnPropertyNames(o13));
+  console.log(Object.getOwnPropertySymbols(o13));
+  var o14 = Object.seal(o13);
+  o14.a = 100;
+  console.log(o14);
 }
-Sample.prototype.show = function () {
-  console.log(this.a + this.b);
-}
-var o9 = new Sample(10, 30);
-console.log(o9.show());
-
-// prototype的属性
-function F() {};
-console.log(F.prototype.constructor);
-console.log(F.prototype.__proto__);
-var o10 = new F();
-console.log(o10.constructor);
-var o11 = {};
-console.log(o11.__proto__);
-console.log(o11.prototype);
-console.log(o11.constructor);
-F.prototype.hello = function () { console.log("hello"); };
-
-function F() {};
-var obj = new F();
-console.log(obj instanceof F); // true
-console.log(obj instanceof Object); // true
-console.log(obj instanceof Date); // false
-
-function F() {};
-var obj = new F();
-console.log(F.prototype.isPrototypeOf(obj)); // true
-console.log(Object.prototype.isPrototypeOf(obj)); // true
-console.log(Date.prototype.isPrototypeOf(obj)); // false
-
-var o12 = Object(1.222);
-console.log(o12);
-console.log(Object.getOwnPropertyDescriptor({a:1}, 'a'));
-var o13 = {a:1, b:2, c: 3, d:4}
-console.log(Object.keys(o13));
-console.log(Object.getOwnPropertyNames(o13));
-console.log(Object.getOwnPropertySymbols(o13));
-var o14 = Object.seal(o13);
-o14.a = 100;
-console.log(o14);
+Object9_2();
 //-------------------------------------------
 // 9.3 修饰性属性
 //-------------------------------------------
-
+function Object9_3() {
+  
+}
 //-------------------------------------------
 // 9.4 属性(property)的属性
 //-------------------------------------------
