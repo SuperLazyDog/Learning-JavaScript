@@ -102,6 +102,40 @@ Sample.prototype.show = function () {
 var o9 = new Sample(10, 30);
 console.log(o9.show());
 
+// prototype的属性
+function F() {};
+console.log(F.prototype.constructor);
+console.log(F.prototype.__proto__);
+var o10 = new F();
+console.log(o10.constructor);
+var o11 = {};
+console.log(o11.__proto__);
+console.log(o11.prototype);
+console.log(o11.constructor);
+F.prototype.hello = function () { console.log("hello"); };
+
+function F() {};
+var obj = new F();
+console.log(obj instanceof F); // true
+console.log(obj instanceof Object); // true
+console.log(obj instanceof Date); // false
+
+function F() {};
+var obj = new F();
+console.log(F.prototype.isPrototypeOf(obj)); // true
+console.log(Object.prototype.isPrototypeOf(obj)); // true
+console.log(Date.prototype.isPrototypeOf(obj)); // false
+
+var o12 = Object(1.222);
+console.log(o12);
+console.log(Object.getOwnPropertyDescriptor({a:1}, 'a'));
+var o13 = {a:1, b:2, c: 3, d:4}
+console.log(Object.keys(o13));
+console.log(Object.getOwnPropertyNames(o13));
+console.log(Object.getOwnPropertySymbols(o13));
+var o14 = Object.seal(o13);
+o14.a = 100;
+console.log(o14);
 //-------------------------------------------
 // 9.3 修饰性属性
 //-------------------------------------------
