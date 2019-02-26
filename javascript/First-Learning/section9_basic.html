@@ -192,42 +192,166 @@ function Object9_3() {
 // 9.4 属性(property)的属性
 //-------------------------------------------
 function Object9_4() {
+  var a = { a: 1 };
+  var b = { b: 1 };
+  Object.setPrototypeOf(b, a);
+  console.log(b);
+  Object.defineProperty(b, "c", {
+    value: 100
+  });
+  console.log(Object.getOwnPropertyDescriptor(b, "b"));
+  console.log(b.c);
+  console.log(Object.getOwnPropertyDescriptor(b, 'a'));
+  Object.defineProperty(b, "a", {value: "aaaaa", writable: true, enumerable: true, configurable: false});
+  b.a = 10000;
+  console.log(Object.getOwnPropertyDescriptor(b, "a"));
+  console.log(b);
 
+  var c = Object.defineProperties({}, {
+    _t: {
+      value: "t",
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    name: {
+      get () {
+        return this._t;
+      },
+      set (v) {
+        this._t += v;
+      },
+      enumerable: true,
+      configurable: true
+    }
+  })
+  console.log(c);
 }
 
 //-------------------------------------------
 // 9.5 确认属性的存在
 //-------------------------------------------
 function Object9_5() {
-
+  var a = { a: 1 };
+  var b = Object.create(a, {
+    b: {
+      value: 1,
+      writbale: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
+  console.log(b);
+  console.log('------------------in--------------------');
+  console.log('b' in b);
+  console.log('a' in b);
+  console.log('--------------hasOwnProperty---------------');
+  console.log(b.hasOwnProperty('b'));
+  console.log(b.hasOwnProperty('a'));
+  console.log('------------propertyIsEnumerable------------');
+  console.log(b.propertyIsEnumerable('a'));
+  console.log(b.propertyIsEnumerable('b'));
 }
 
 //-------------------------------------------
 // 9.6 属性的枚举
 //-------------------------------------------
 function Object9_6() {
-
+  var a = { a: 1 };
+  var b = Object.create(a, {
+    b: {
+      value: 1,
+      writbale: true,
+      enumerable: true,
+      configurable: true
+    },
+    c: {
+      value: 2,
+      writable: true,
+      enumerable: false,
+      configurable: true
+    }
+  });
+  for (var name in a) {
+    console.log('a.' + name + ': ' + a[name]);
+  }
+  for (var name in b) {
+    console.log('b.' + name + ': ' + b[name]);
+  }
+  console.log(Object.keys(b));
+  console.log(Object.getOwnPropertyNames(b));
+  console.log(Object.getOwnPropertySymbols(b));
 }
 
 //-------------------------------------------
 // 9.7 Object的lock
 //-------------------------------------------
 function Object9_7() {
+  // "use strict";
+  var a = {a: 1};
+  Object.preventExtensions(a);
+  a.b = 1;
+  console.log(a);
 
+  var b = { b: 1 };
+  Object.seal(b);
+  b.b = 2;
+  console.log(b);
+  console.log('isSealed?: ' + Object.isSealed(b));
+  console.log('isFrozen?: ' + Object.isFrozen(b));
+  Object.freeze(b);
+  console.log('isFrozen?: ' + Object.isFrozen(b));
 }
 
 //-------------------------------------------
 // 9.8 Mixin
 //-------------------------------------------
 function Object9_8() {
-
+  let a = {
+    a: 1,
+    get name() {
+      return this.a;
+    },
+    set name(v) {
+      this.a = v;
+    }
+  }
+  let b = {};
+  Object.assign(b, a);
+  console.log(a);
+  console.log(b);
+  // console.log(Object.getOwnPropertyDescriptor(a, 'name'));
+  b = {};
+  mixin(b, a);
+  console.log(b);
+  function mixin(to, from) {
+    for (var p in from) {
+      if (from.hasOwnProperty(p)) {
+        Object.defineProperty(to, p, Object.getOwnPropertyDescriptor(from, p));
+      }
+    }
+    return to;
+  }
 }
 
 //-------------------------------------------
 // 9.9 JSON
 //-------------------------------------------
 function Object9_9() {
-
+  var a = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: function (a, b) {
+      let c;
+      return 1;
+    }
+  }
+  console.log(JSON.stringify(a));
+  console.log(JSON.stringify(a, ["c", "x"]));
+  let j = JSON.stringify(a);
+  console.log(j);
+  console.log(JSON.parse(j));
 }
 
 //-------------------------------------------
