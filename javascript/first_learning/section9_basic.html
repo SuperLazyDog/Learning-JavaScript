@@ -455,6 +455,86 @@ function Object18_2() {
 // 18.3 ES6的class语法
 //-------------------------------------------
 function Object18_3() {
+  class A {
+    constructor() {
+      this.a = 1;
+    }
+    show() {
+      console.log(`this.a = ${this.name}`);
+    }
+    get name() {
+      return this.a;
+    }
+    set name(v) {
+      this.a = v;
+    }
+  }
+  let a = new A();
+  a.show();
+  console.log(a);
+
+  function B() {
+    this.a = 1;
+
+  }
+  Object.defineProperty(B.prototype, 'name', {
+    get: function() {
+      return this.a;
+    },
+    set: function(v) {
+      this.a = v;
+    }
+  });
+  B.prototype.show = function () {
+    console.log(this.name);
+  }
+  let b = new B();
+  console.log(b);
+
+  class C {
+    show() {
+      console.log(`name: ${this.name}`);
+    }
+    get name() {
+      return this.a;
+    }
+    set name(v) {
+      this.a = v.toString();
+    }
+  }
+  let c = new C();
+  c.show();
+  c.name = "sample"
+  c.show();
+
+  class D {
+    static sampleShow() {
+      console.log(`properties: ${Object.getOwnPropertyNames(this)}`);
+    }
+  }
+  console.log(D.sampleShow());
+
+  class Super {
+    constructor() {
+      this.super = 1;
+      this.kkk = 2121;
+    }
+    bbbbbbbb = 1;
+    showA() {
+      console.log(`here is Super`);
+    }
+  }
+  class Sub extends Super {
+    constructor() {
+      super();
+      this.sub = 1;
+    }
+    showB() {
+      console.log("here is Sub");
+    }
+  }
+  console.log(new Super());
+  console.log(new Sub());
 }
 
 </script>
