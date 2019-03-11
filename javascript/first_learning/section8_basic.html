@@ -94,7 +94,20 @@ function funtion8_8() {
   console.log(`//-------------------------------------------`);
   console.log(`// 8.8 作为对象的函数`);
   console.log(`//-------------------------------------------`);
+  var a = function (a, b, c) {};
+  var b = a;
+  console.log(a.length);
+  console.log(a.caller);
+  console.log(a.name);
+  console.log(b.name);
+
+  function showThis(a) {console.log(`this: ${this}`);}
+  console.log(showThis.apply('sample', [100]));
+  function showBind(arg) {console.log(`this: ${this}, arg: ${arg}`);};
+  console.log(showBind.bind({a:100, b: 200})(10));
+  console.log(showBind(100));
 }
+
 //-------------------------------------------
 // 8.9 高阶函数
 //-------------------------------------------
@@ -118,6 +131,15 @@ function funtion8_11() {
   console.log(`//-------------------------------------------`);
   console.log(`// 8.11 ES6关于函数的扩张`);
   console.log(`//-------------------------------------------`);
+  // (()=>{console.log(this);})(); // => Window
+  ((a, ...b) => (console.log(a, b)))(100, 200, 300);
+  function a(t=1) {
+    console.log(`t=${t}`);
+  }
+  a();
+  a(100);
+  a(null);
+  a(undefined);
 }
 </script>
 </body>
