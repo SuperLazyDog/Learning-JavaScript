@@ -95,6 +95,45 @@ class Array4 {
     for (var v of iter) {
       console.log(v);
     }
+
+    function* sample() {
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+    iter = sample();
+    for(var t of iter) {
+        console.log(`sample data: ${t}`);
+    }
+
+    function* fibonacci() {
+      var fn1 = 0, fn2 = 1;
+      while(true) {
+        var fnew = fn1+fn2;
+        fn1 = fn2;
+        fn2 = fnew;
+        var reset = yield fn1;
+        console.log(`reset: ${reset}`);
+        if (reset) {
+          fn1 = 0;
+          fn2 = 1;
+        }
+      }
+    }
+    var iter2 = fibonacci();
+    // for (var i = 0; i < 10; i++) {
+    //   console.log(iter2.next().value);
+    // }
+    console.log(iter2.next());
+    console.log(iter2.next(true));
+    console.log(iter2.next());
+    var iter3 = (function* iterator3() {
+      const str = "i am kedaya";
+      yield* str;
+    })();
+    for (var v of iter3) {
+      console.log(v);
+    }
   }
 }
 
