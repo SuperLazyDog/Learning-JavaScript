@@ -53,6 +53,44 @@ class Array2 {
     console.log(a.toString() === a.join());
     console.log(a.toLocaleString() === a.join());
 
+    a.forEach((a, b, c)=>{
+      console.log(`value: ${a}, index: ${b}, array: ${c}`);
+    });
+    var b = a.map((v)=>{
+      return 100;
+    });
+    console.log(a);
+    console.log(b);
+    a = [1, 2, 3, 4, 5, 6]
+    a.reduce((prev, value, index, array) => {
+      console.log(`prev: ${prev}, value: ${value}, index: ${index}, array: ${array}`);
+      return prev + value;
+    });
+    var iter = a.entries();
+    for (var temp of iter) {
+      console.log(temp);
+    }
+    a.every((v, i, a) => {
+      console.log(this);
+      return false;
+    });
+    var c = a.filter((v, i, a) => {
+      return false;
+    })
+    console.log(c);
+    console.log(a.find((v) => {
+      return v%3 === 0;
+    }));
+    a = ["h", "das", "sa", "ol"]
+    for (var temp of a.keys()) {
+      console.log(temp);
+    }
+    for (var temp of a.values()) {
+      console.log(temp);
+    }
+    a.reduceRight((p, v, i, a) => {
+      console.log(`p: ${p}, v: ${v}, i: ${i}, a: ${a}`);
+    });
   }
 }
 //-------------------------------------------
@@ -138,6 +176,6 @@ class Array4 {
 }
 
 let arys = [new Array1(), new Array2(), new Array3(), new Array4()];
-for (var i = 0; i < arys.length; i++) {
+for (var i = 0; i < arys.length-1; i++) {
   arys[i].pro();
 }
