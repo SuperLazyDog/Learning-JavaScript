@@ -1,3 +1,4 @@
 export default function printMe() {
-  console.log('called from print.js');
+  var __file__ = 'print.js';
+  console.log(`Updating ${__file__}...`);
 }
