@@ -35,6 +35,7 @@ class JSX extends React.Component {
 class Clock extends React.Component {
   constructor(props) {
     super(props);
+    this.title =  this.props.title || "sample";
     this.state = {
       date: new Date()
     };
@@ -55,7 +56,7 @@ class Clock extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello, world!</h1>
+        <h1>title: {this.title}</h1>
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
@@ -63,8 +64,33 @@ class Clock extends React.Component {
 }
 
 ReactDOM.render(
-  <Clock />,
-  document.getElementById('root')
+  <Clock title="state"/>,
+  document.getElementById('state')
+);
+
+
+//-----------------------------------------------------------------------------
+// 事件处理
+//-----------------------------------------------------------------------------
+class Events extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  clickHandle = e => {
+    console.log(e);
+  };
+  render() {
+    return (
+      <div>
+        <h1>title: events</h1>
+        <p onClick={this.clickHandle}>click</p>
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <Events />,
+  document.getElementById('event')
 );
 
 
