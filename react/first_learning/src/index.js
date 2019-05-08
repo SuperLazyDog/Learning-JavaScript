@@ -25,10 +25,10 @@ class JSX extends React.Component {
     return this.jsxElement;
   }
 }
-// ReactDOM.render(
-//   <JSX test={12345}/>,
-//   document.getElementById('root')
-// );
+ReactDOM.render(
+  <JSX test={12345}/>,
+  document.getElementById('jsx')
+);
 //-----------------------------------------------------------------------------
 // state&生命周期
 //-----------------------------------------------------------------------------
@@ -73,12 +73,9 @@ ReactDOM.render(
 // 事件处理
 //-----------------------------------------------------------------------------
 class Events extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   clickHandle = e => {
     console.log(e);
-  };
+  }
   render() {
     return (
       <div>
@@ -92,8 +89,33 @@ ReactDOM.render(
   <Events />,
   document.getElementById('event')
 );
-
-
+//-----------------------------------------------------------------------------
+// 条件渲染
+//-----------------------------------------------------------------------------
+function Con1() {
+  return (
+    <p>Con1</p>
+  );
+}
+function Con2() {
+  return (
+    <p>Con2</p>
+  );
+}
+class Condition extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>title: condition</h1>
+        {(Math.random()*100) > 50 ? <Con1 /> : <Con2 />}
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <Condition />,
+  document.getElementById('condition')
+);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
