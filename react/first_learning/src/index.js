@@ -116,6 +116,60 @@ ReactDOM.render(
   <Condition />,
   document.getElementById('condition')
 );
+//-----------------------------------------------------------------------------
+// 列表 & Key
+//-----------------------------------------------------------------------------
+class ListKey extends React.Component {
+  constructor(props) {
+    super(props);
+    this.datas = new Array(10).fill(Math.random()*100).map((v, i) => {return v+i});
+    this.listItems = this.datas.map((v, i) => {
+      return (
+        <li key={i} mykey={i}>data: {parseInt(v)}</li>
+      );
+    });
+  }
+  render() {
+    return (
+      <div>
+        <h1>title: list & key</h1>
+        <ul>{this.listItems}</ul>
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <ListKey />,
+  document.getElementById('listkey')
+);
+
+//-----------------------------------------------------------------------------
+// 表单
+//-----------------------------------------------------------------------------
+class Form extends React.Component {
+  render() {
+    return (
+      <form>
+        name:<input type="text" />
+        <br />
+        type: <input type="radio" name="type" value="0" /> <input type="radio" name="type" value="1" />
+        <br />
+        <fieldset>
+          <legend>abc</legend>
+          name: <input type="text" name="name" value="sample-name" />
+          <br />
+          sex: male<input type="radio" name="sex" value="0" /> : female<input type="radio" name="sex" value="1" />
+        </fieldset>
+        <br />
+        <input type="submit" value="submit" />
+      </form>
+    );
+  }
+}
+ReactDOM.render(
+  <Form />,
+  document.getElementById('form')
+);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
