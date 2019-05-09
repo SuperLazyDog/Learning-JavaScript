@@ -18,7 +18,7 @@ class JSX extends React.Component {
       name: '妖怪',
       sex: '不男不女',
     }
-    this.jsxElement = <p sampleProp={0}>{this.buildName(this.people)}</p>;
+    this.jsxElement = <p sampleprop={0}>{this.buildName(this.people)}</p>;
     this.blankElement = <p/>;
   }
   render() {
@@ -147,27 +147,56 @@ ReactDOM.render(
 // 表单
 //-----------------------------------------------------------------------------
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(e) {
+    const name = e.target.name
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    this.setState({
+      [name]: value
+    })
+    console.log(e.target.value);
+  }
+  handleSubmit(e) {
+    console.log('即将提交');
+    console.log(this.state);
+    e.preventDefault();
+  }
   render() {
     return (
-      <form>
-        name:<input type="text" />
-        <br />
-        type: <input type="radio" name="type" value="0" /> <input type="radio" name="type" value="1" />
-        <br />
-        <fieldset>
-          <legend>abc</legend>
-          name: <input type="text" name="name" value="sample-name" />
+      <div>
+        <h1>title: form</h1>
+        <form onSubmit={this.handleSubmit}>
+          name:<input type="text" name='name0' value={this.state.name0} onChange={this.handleChange}/>
           <br />
-          sex: male<input type="radio" name="sex" value="0" /> : female<input type="radio" name="sex" value="1" />
-        </fieldset>
-        <br />
-        <input type="submit" value="submit" />
-      </form>
+          type: <input type="radio" name="type" value="0"  onChange={this.handleChange}/> <input type="radio" name="type" value="1"  onChange={this.handleChange}/>
+          <br />
+          <fieldset>
+            <legend>abc</legend>
+            name: <input type="text" name="name" value={this.state.name}  onChange={this.handleChange}/>
+            <br />
+            sex: male<input type="radio" name="sex" value="0"  onChange={this.handleChange}/> : female<input type="radio" name="sex" value="1"  onChange={this.handleChange}/>
+          </fieldset>
+          <br />
+          <textarea name="sampleTextArea" cols="60" rows="20" value={this.state.sampleTextArea}  onChange={this.handleChange}/>
+          <select name="sampleSelect" onChange={this.handleChange} value={this.state.sampleSelect}>
+            <option value="a">a</option>
+            <option value="b">b</option>
+            <option value="c">c</option>
+          </select>
+          <input type="submit" value="submit"  onChange={this.handleChange}/>
+          <button type="submit">提交</button>
+        </form>
+      </div>
     );
   }
 }
 ReactDOM.render(
-  <Form />,
+  (<Form><h1>inner</h1></Form>),
   document.getElementById('form')
 );
 // If you want your app to work offline and load faster, you can change
