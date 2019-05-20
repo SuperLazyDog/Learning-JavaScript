@@ -35,6 +35,40 @@
     }
 
     // TODO: 补充15.9 p435
+    function test_15_8() {
+      // console.log('A');
+      // setTimeout(() => {
+      //   console.log('B');
+      // }, 0);
+      // console.log('C');
+      // const a = {
+      //   sample: 'just a test'
+      // };
+      // setTimeout(()=>{
+      //   console.log('A');
+      //   setTimeout(()=>{
+      //     console.log('B');
+      //     setTimeout(()=>{
+      //       console.log('C');
+      //     }, 0);
+      //   },0);
+      // }, 0);
+      // const {sample} = a;
+      // console.log(sample);
+      const promise = new Promise((resolve, reject) => {
+        console.log("a");
+        resolve('b');
+        reject('c');
+      })
+      promise
+      .then((data) => {
+        console.log(data);
+        console.log(promise);
+      })
+      .catch((data)=>{
+        console.log(data);
+      });
+    }
   </script>
   <div class="mainBody" style="margin: auto; text-align: center;">
     <!--*********************************************
@@ -90,7 +124,7 @@
                15.9 做一个画图软件
     **********************************************-->
     <h1>15.9 做一个画图软件</h1>
-    <input type="button" value="115.9 做一个画图软件" onclick="test_15_9()">
+    <input type="button" value="15.9 做一个画图软件" onclick="test_15_9()">
   </div>
 
 </body>
