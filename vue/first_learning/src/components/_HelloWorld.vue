@@ -1,3 +1,4 @@
+<!-- TODO weida: here is default file from vue cli -->
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
