@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <p>UUID</p>
+    <Basic/>
   </div>
 </template>
 
 <script>
+import Basic from './components/basic.vue'
 
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Basic
+  }
 }
 </script>
