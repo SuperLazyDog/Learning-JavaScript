@@ -178,3 +178,15 @@ var app13 = new Vue({
     vForSample: "UUID7"
   }
 });
+
+Vue.component('sample-component', {
+  data: function() {
+    return {
+      text: 'sample-component'
+    };
+  },
+  template: "<p>text: {{text}}</p>"
+})
+var app14 = new Vue({
+  el: '#app-14'
+});
