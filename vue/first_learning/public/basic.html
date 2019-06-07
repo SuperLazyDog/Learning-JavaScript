@@ -37,12 +37,108 @@
           v-bind:data='item'
           v-bind:key='item.id'
         ></Sample>
-        <!-- <todo-item
-          v-for='item in list'
-          v-bind:data='item'
-          v-bind:key='item.id'
-        ></todo-item> -->
       </ul>
+    </div>
+
+    <!-- 计算属性与侦听器 -->
+    <div id="app-8">
+      <p v-bind:class="sample_class">{{data}} {{computedData}}</p>
+      <p v-bind:id="sample_id" v-bind:style="">{{now().toLocaleString()}}</p>
+    </div>
+
+    <!-- Class 与 Style 绑定 -->
+    <div id="app-9">
+      <p v-bind:class="{app9: classes.isActive}">sample_class: object</p>
+      <p v-bind:class="['a', 'b', 'c', {d: true, e: true, f: false}]">
+        sample_class2: array
+      </p>
+
+      <p v-bind:style="[{'font-size': '12px'}, {display: ['a', '']}]">
+        sample_style:object
+      </p>
+    </div>
+
+    <!-- 条件渲染 -->
+    <div id="app-10">
+      <p v-show="show">sample</p>
+    </div>
+
+    <!-- 列表渲染 -->
+    <div id="app-11">
+      <p v-for="(item, i) in filteredList">{{`${item.text}+${item.title}-${i}`}}</p>
+      <table>
+        <tr>
+          <td>key</td>
+          <td>index</td>
+          <td>value</td>
+        </tr>
+        <tr v-for="(v, k, i) in sampleData">
+          <td>{{k}}</td>
+          <td>{{i}}</td>
+          <td>{{v}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 事件处理 -->
+    <div id="app-12">
+      <p>times: {{click_count}}</p>
+      <button type="button" name="button" @click="msg('app-12')">
+        click me
+      </button>
+
+      <button type="button" name="button" @click.capture="debug('a')">
+        debug a
+        <p @click="debug('b')">
+          debug b
+        </p>
+      </button>
+    </div>
+
+    <!-- 表单输入绑定 -->
+    <div id="app-13">
+      <!--  text -->
+      <p>text_input: {{text_input}}</p>
+      <input v-model="text_input" placeholder="sample input"></input>
+
+      <!-- textarea -->
+      <p>textarea_input: {{textarea_input}}</p>
+      <textarea name="name" placeholder="textarea_input" v-model="textarea_input"></textarea>
+
+      <!-- checkbox -->
+      <p>single_checkbox_input: {{single_checkbox_input}}</p>
+      <input type="checkbox" v-model="single_checkbox_input" />
+
+      <p>checkbox_input: {{checkbox_input}}</p>
+      <input type="checkbox" v-model="checkbox_input" value="1"></input>
+      <input type="checkbox" v-model="checkbox_input" value="2"></input>
+      <input type="checkbox" v-model="checkbox_input" value="3"></input>
+      <input type="checkbox" v-model="checkbox_input" value="4"></input>
+
+      <!-- radio -->
+      <p>radio_input: {{radio_input}}</p>
+      <input type="radio" name="radio_input" value="radio_a" v-model="radio_input"></input>
+      <input type="radio" name="radio_input" value="radio_b" v-model="radio_input"></input>
+
+      <!-- select -->
+      <p>single_select_input: {{single_select_input}}</p>
+      <select name="sampleSelect" v-model="single_select_input">
+        <option value="a">1</option>
+        <option value="b">2</option>
+        <option value="c">3</option>
+      </select>
+
+      <p>select_input: {{select_input}}</p>
+      <select name="sampleSelect" v-model="select_input" multiple>
+        <option value="a">1</option>
+        <option value="b">2</option>
+        <option value="c">3</option>
+      </select>
+
+      <p>vForSample: {{vForSample}}</p>
+      <select name="v-for-options-sample" v-model="vForSample">
+        <option v-for="o in options" :value="o.value">{{o.text}}</option>
+      </select>
     </div>
     <script src="basic.js"></script>
   </body>
