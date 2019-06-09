@@ -185,8 +185,39 @@ Vue.component('sample-component', {
       text: 'sample-component'
     };
   },
-  template: "<p>text: {{text}}</p>"
+  props: ['test'],
+  template: `
+    <p v-on:click="clickHander">
+      text: {{text}}, {{test}}
+    </p>
+  `,
+  methods: {
+    clickHander: function() {
+      // console.log('before');
+      this.$emit('sample-event', 0);
+      // console.log(`contents: ${this.test}`);
+      // console.log('after');
+    }
+  }
+})
+
+Vue.component('custom-input', {
+  props: ['value'],
+  template: `
+    <input
+      v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)"
+    >
+  `,
 })
 var app14 = new Vue({
-  el: '#app-14'
+  el: '#app-14',
+  data: {
+    searchText: 'sample'
+  },
+  methods: {
+    sampleEventHander: function() {
+      console.log(`sample event fired`);
+    }
+  }
 });

@@ -142,10 +142,13 @@
     </div>
 
     <!-- 组件基础 -->
-    <div id="app-14">
-      <sample-component></sample-component>
-      <sample-component></sample-component>
-      <sample-component></sample-component>
+    <div id="app-14" >
+      <div>
+        <sample-component test="test-a" v-on:sample-event="sampleEventHander"></sample-component>
+        <sample-component test="test-b" v-on:sample-event="sampleEventHander"></sample-component>
+        <sample-component test="test-c" v-on:sample-event="sampleEventHander"></sample-component>
+      </div>
+      <custom-input v-model="searchText"></custom-input>
     </div>
     <script src="basic.js"></script>
   </body>
